@@ -1,0 +1,15 @@
+C:\Users\Xoka74\Desktop\Xoka\polynomialRootSolve\polynomialRootSolve\bin\Debug\net6.0\polynomialRootSolve.exe
+C:\Users\Xoka74\Desktop\Xoka\polynomialRootSolve\polynomialRootSolve\bin\Debug\net6.0\polynomialRootSolve.deps.json
+C:\Users\Xoka74\Desktop\Xoka\polynomialRootSolve\polynomialRootSolve\bin\Debug\net6.0\polynomialRootSolve.runtimeconfig.json
+C:\Users\Xoka74\Desktop\Xoka\polynomialRootSolve\polynomialRootSolve\bin\Debug\net6.0\polynomialRootSolve.dll
+C:\Users\Xoka74\Desktop\Xoka\polynomialRootSolve\polynomialRootSolve\bin\Debug\net6.0\polynomialRootSolve.pdb
+C:\Users\Xoka74\Desktop\Xoka\polynomialRootSolve\polynomialRootSolve\obj\Debug\net6.0\polynomialRootSolve.csproj.AssemblyReference.cache
+C:\Users\Xoka74\Desktop\Xoka\polynomialRootSolve\polynomialRootSolve\obj\Debug\net6.0\polynomialRootSolve.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Xoka74\Desktop\Xoka\polynomialRootSolve\polynomialRootSolve\obj\Debug\net6.0\polynomialRootSolve.AssemblyInfoInputs.cache
+C:\Users\Xoka74\Desktop\Xoka\polynomialRootSolve\polynomialRootSolve\obj\Debug\net6.0\polynomialRootSolve.AssemblyInfo.cs
+C:\Users\Xoka74\Desktop\Xoka\polynomialRootSolve\polynomialRootSolve\obj\Debug\net6.0\polynomialRootSolve.csproj.CoreCompileInputs.cache
+C:\Users\Xoka74\Desktop\Xoka\polynomialRootSolve\polynomialRootSolve\obj\Debug\net6.0\polynomialRootSolve.dll
+C:\Users\Xoka74\Desktop\Xoka\polynomialRootSolve\polynomialRootSolve\obj\Debug\net6.0\refint\polynomialRootSolve.dll
+C:\Users\Xoka74\Desktop\Xoka\polynomialRootSolve\polynomialRootSolve\obj\Debug\net6.0\polynomialRootSolve.pdb
+C:\Users\Xoka74\Desktop\Xoka\polynomialRootSolve\polynomialRootSolve\obj\Debug\net6.0\polynomialRootSolve.genruntimeconfig.cache
+C:\Users\Xoka74\Desktop\Xoka\polynomialRootSolve\polynomialRootSolve\obj\Debug\net6.0\ref\polynomialRootSolve.dll
