@@ -1,175 +1,88 @@
-﻿using System.Text;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Text;
 using System.Linq;
 
 namespace polynomialRootSolve;
 
-public class Polynom
+public partial class Polynom
 {
-    public Polynom(string polynom = null)
+    private Polynom(double[] members) => Members = members;
+    public Polynom Copy() => new Polynom(Members);
+    public bool Equals(Polynom pol) => Equals(this, pol);
+    private double[] _members;
+
+    public double[] Members
     {
-        if (polynom != null)
-            BuildPolynomByString(polynom);
+        get => _members;
+        private set => _members = value;
     }
 
-    public double[] _members { get; set; }
-
-    public Polynom Copy()
+    public double this[int i]
     {
-        var newPolynom = new Polynom();
-        newPolynom._members = this._members;
-        return newPolynom;
+        get => _members[i];
     }
+
+    private int _maxPow { get; }
 
     public override string ToString()
     {
         var sb = new StringBuilder();
-        for (int i = _members.Length - 1; i >= 0; i--)
-            if (_members[i] != 0)
-                sb.Append($"({_members[i]})*x^{i} + ");
-
-        return sb.ToString().TrimEnd('+', ' ');
-    }
-
-    public int GetMaxPow() => _members.Length - 1;
-
-    public static Polynom operator *(Polynom pol, double mult)
-    {
-        var newPol = pol.Copy();
-        for (var i = 0; i < newPol._members.Length; i++)
+        for (int i = Members.Length - 1; i > 1; i--)
         {
-            newPol._members[i] = newPol._members[i] * mult;
+            if (Members[i] == 0) continue;
+            if (Members[i] > 0)
+                sb.Append($"{Members[i]}*x^{i} + ");
+            else
+                sb.Append($"({Members[i]})*x^{i} + ");
         }
 
-        return newPol;
-    }
+        if (Members[1] != 0)
+        {
+            if (Members[1] > 0)
+                sb.Append($"{Members[1]}*x + ");
+            else
+                sb.Append($"({Members[1]})*x + ");
+        }
 
-    public static Polynom operator *(Polynom pol1, Polynom mult2)
-    {
-        // TODO: multiply polynoms
-        throw new NotImplementedException();
+        if (Members[0] != 0)
+        {
+            if (Members[0] > 0)
+                sb.Append($"{Members[0]} + ");
+            else
+                sb.Append($"({Members[0]}) + ");
+        }
+
+        return sb.ToString().TrimEnd('+', ' ');
     }
 
     public double GetValue(double x)
     {
         double total = 0;
-        for (var i = 0; i < _members.Length; i++)
-        {
-            total += _members[i] * Math.Pow(x, i);
-        }
+        for (var i = 0; i < Members.Length; i++)
+            total += Members[i] * Math.Pow(x, i);
 
         return total;
     }
 
-    public double GetRootFromWolfram()
-    {
-        // TODO: Just funny thing in future to write http query 
-        throw new NotImplementedException();
-    }
-
-    public string GetRoot(double delta = 1e-6)
-    {
-        var derivative = GetDerivative();
-        double x = 10;
-        for (int i = 0; i < 10_000; i++)
-        {
-            var calcValue = GetValue(x);
-            x = x - (calcValue / derivative.GetValue(x));
-            if (x == 0)
-                x = 1e-9;
-        }
-
-        if (Math.Abs(GetValue(x)) < delta)
-            return x.ToString().Replace(",", ".");
-        return "no roots";
-    }
-
-    public string GetRootsLaguerreMethod(int iterationsCount)
-    {
-        var derivative = GetDerivative();
-        var secondDerivative = derivative.GetDerivative();
-        var x = 1.0;
-        for (int k = 0; k < iterationsCount; k++)
-        {
-            var calcValue = GetValue(x);
-            if (calcValue == 0)
-                calcValue = 1e-3;
-            var g = derivative.GetValue(x) / calcValue;
-            var h = g * g - secondDerivative.GetValue(x) / calcValue;
-            var n = GetMaxPow();
-            var partOfFormula = Math.Sqrt((n - 1) * (n * h - g * g));
-            var denominator = Math.Max(g - partOfFormula, g + partOfFormula);
-            var a = n / denominator;
-            x = x - a;
-            if (a < 1e-9) break;
-        }
-
-        return x.ToString();
-    }
-
     public Polynom GetDerivative()
     {
-        var derivative = new Polynom();
-        derivative._members = new double[GetMaxPow()];
-        for (int i = _members.Length - 2; i >= 0; i--)
-            derivative._members[i] = _members[i + 1] * (i + 1);
-        return derivative;
+        var derivativeMembers = new double[_maxPow];
+        for (int i = derivativeMembers.Length - 2; i >= 0; i--)
+            derivativeMembers[i] = Members[i + 1] * (i + 1);
+        return new Polynom(derivativeMembers);
     }
 
-    private void BuildPolynomByString(string polynom)
+    public static bool Equals(Polynom pol1, Polynom pol2)
     {
-        var elements = PreformatPolynom(polynom);
-        var maxPow = FindMaxPow(elements);
-        _members = new double[maxPow + 1];
-        foreach (var element in elements)
-        {
-            var parts = element.Split('*', '^');
-            if (element.ContainsAll('*', '^'))
-            {
-                var pow = int.Parse(parts[2]);
-                _members[pow] += double.Parse(parts[0]);
-            }
-            else if (element.Contains('*'))
-                _members[1] += double.Parse(parts[0]);
-            else if (element.Contains('^'))
-            {
-                var pow = int.Parse(parts[1]);
-                _members[pow] += 1.0;
-            }
-            else if (element == "x")
-                _members[1] += 1;
-            else
-                _members[0] += double.Parse(parts[0]);
-        }
-    }
-
-    private int FindMaxPow(List<string> elements)
-    {
-        var maxPow = 0;
-        var currentPow = "0";
-        foreach (var elem in elements)
-        {
-            if (elem.Contains('x'))
-            {
-                if (elem.Contains('^'))
-                    currentPow = elem.Split('^')[^1];
-                else
-                    currentPow = "1";
-            }
-
-            var curPowNumber = int.Parse(currentPow);
-            if (maxPow < curPowNumber)
-                maxPow = curPowNumber;
-        }
-
-        return maxPow;
-    }
-
-    private List<string> PreformatPolynom(string polynom)
-    {
-        var elements = polynom.Split(' ').Where(x => x is not "+" or "-").ToList();
-        for (int i = 0; i < elements.Count; i++)
-            elements[i] = elements[i].DeleteSymbols(")", "(").Replace('.', ',');
-
-        return elements;
+        var pol1Length = pol1.Members.Length;
+        var pol2Length = pol1.Members.Length;
+        if (pol1Length != pol2Length) return false;
+        for (int i = 0; i < pol1Length; i++)
+            if (!(pol1[i] == pol2[i]))
+                return false;
+        
+        return true;
     }
 }
