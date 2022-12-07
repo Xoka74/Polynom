@@ -1,12 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Xyk5DNMtcb00Kq0aYa9P9UL5q9Kkj7a44cLG2CfDF2MJoTLLmur7mfHzvRS6Ta3F8k0MpDwzAlFZXYjnrTJ7eg==",
+  "dgSpecHash": "E+1H4NZAAW3MUD/0rgL4Vq4goTdpwY34SlxuEIXAYdjCnGI4hiqc7xiTOQjQ4TJ0mzuR8jqT8EIHwf9Yclg/SQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\Xoka74\\Desktop\\Xoka\\polynomialRootSolve\\Polynom\\Polynom.csproj",
-  "expectedPackageFiles": [
-    "C:\\Users\\Xoka74\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
-    "C:\\Users\\Xoka74\\.nuget\\packages\\netstandard.library\\2.0.0\\netstandard.library.2.0.0.nupkg.sha512",
-    "C:\\Users\\Xoka74\\.nuget\\packages\\nunit\\3.13.3\\nunit.3.13.3.nupkg.sha512"
-  ],
+  "expectedPackageFiles": [],
   "logs": []
 }

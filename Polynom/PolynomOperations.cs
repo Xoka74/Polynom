@@ -2,44 +2,53 @@
 
 public partial class Polynom
 {
-    public static Polynom operator *(Polynom pol, double mult)
+    public static bool operator ==(Polynom left, Polynom right) => Equals(left, right);
+    public static bool operator !=(Polynom left, Polynom right) => !(left == right);
+    public static Polynom operator *(Polynom left, double mult)
     {
-        var members = (double[])pol.Members.Clone();
+        var members = (double[])left.Members.Clone();
         for (var i = 0; i < members.Length; i++)
-            members[i] = pol.Members[i] * mult;
+            members[i] = left.Members[i] * mult;
 
         return new Polynom(members);
     }
-    public static Polynom operator *(Polynom pol1, Polynom pol2)
+    public static Polynom operator *(Polynom left, Polynom right)
     {
-        var pol1Length = pol1.Members.Length;
-        var pol2Length = pol2.Members.Length;
+        var pol1Length = left.Members.Length;
+        var pol2Length = right.Members.Length;
         var members = new double[pol1Length + pol2Length];
         for (int i = 0; i < pol1Length; i++)
         for (int j = 0; j < pol2Length; j++)
-            members[i + j] += pol1.Members[i] * pol2.Members[j];
+            members[i + j] += left.Members[i] * right.Members[j];
 
         return new Polynom(members);
     }
 
-    public static Polynom operator +(Polynom pol1, Polynom pol2)
+    public static Polynom operator +(Polynom left, Polynom right)
     {
-        var pol1Length = pol1.Members.Length;
-        var pol2Length = pol2.Members.Length;
+        var pol1Length = left.Members.Length;
+        var pol2Length = right.Members.Length;
         var members = new double[Math.Max(pol1Length, pol2Length)];
         for (int i = 0; i < pol1Length; i++)
-            members[i] += pol1.Members[i];
+            members[i] += left.Members[i];
         for (int j = 0; j < pol2Length; j++)
-            members[j] += pol2.Members[j];
+            members[j] += right.Members[j];
         
         return new Polynom(members);
     }
-    public static Polynom operator -(Polynom pol1, Polynom pol2)
+    public static Polynom operator -(Polynom left, Polynom right)
     {
         // TODO: substracting polynoms
         throw new NotImplementedException();
     }
 
-    public static bool operator ==(Polynom pol1, Polynom pol2) => Equals(pol1, pol2);
-    public static bool operator !=(Polynom pol1, Polynom pol2) => !(pol1 == pol2);
+    public static Polynom operator /(Polynom left, Polynom right)
+    {
+        // TODO : dividing polynoms
+        // Examples:
+        // (8t^2 + 10t - 3)
+        // (2t + 3)
+        throw new NotImplementedException();
+    }
+
 }

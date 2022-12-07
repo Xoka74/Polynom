@@ -31,19 +31,27 @@ public partial class Polynom
         var sb = new StringBuilder();
         for (int i = Members.Length - 1; i > 1; i--)
         {
-            if (Members[i] == 0) continue;
-            if (Members[i] > 0)
+            if (Members[i] == 0) 
+                continue;
+            if (Members[i] == 1) 
+                sb.Append($"x^{i} + ");
+            else if (Members[i] > 0)
                 sb.Append($"{Members[i]}*x^{i} + ");
             else
                 sb.Append($"({Members[i]})*x^{i} + ");
         }
 
-        if (Members[1] != 0)
+        if (Members.Length >= 2)
         {
-            if (Members[1] > 0)
-                sb.Append($"{Members[1]}*x + ");
-            else
-                sb.Append($"({Members[1]})*x + ");
+            if (Members[1] != 0)
+            {
+                if (Members[1] == 1)
+                    sb.Append($"x + ");
+                else if (Members[1] > 0)
+                    sb.Append($"{Members[1]}*x + ");
+                else
+                    sb.Append($"({Members[1]})*x + ");
+            }   
         }
 
         if (Members[0] != 0)
@@ -54,7 +62,7 @@ public partial class Polynom
                 sb.Append($"({Members[0]}) + ");
         }
 
-        return sb.ToString().TrimEnd('+', ' ');
+        return sb.ToString() != String.Empty ? sb.ToString().TrimEnd('+', ' ') : "0";
     }
 
     public double GetValue(double x)
@@ -68,7 +76,7 @@ public partial class Polynom
 
     public Polynom GetDerivative()
     {
-        var derivativeMembers = new double[_maxPow];
+        var derivativeMembers = new double[Members.Length];
         for (int i = derivativeMembers.Length - 2; i >= 0; i--)
             derivativeMembers[i] = Members[i + 1] * (i + 1);
         return new Polynom(derivativeMembers);

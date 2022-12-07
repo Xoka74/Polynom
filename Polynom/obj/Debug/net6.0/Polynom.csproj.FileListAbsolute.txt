@@ -13,5 +13,3 @@ C:\Users\Xoka74\Desktop\Xoka\polynomialRootSolve\Polynom\obj\Debug\net6.0\refint
 C:\Users\Xoka74\Desktop\Xoka\polynomialRootSolve\Polynom\obj\Debug\net6.0\Polynom.pdb
 C:\Users\Xoka74\Desktop\Xoka\polynomialRootSolve\Polynom\obj\Debug\net6.0\Polynom.genruntimeconfig.cache
 C:\Users\Xoka74\Desktop\Xoka\polynomialRootSolve\Polynom\obj\Debug\net6.0\ref\Polynom.dll
-C:\Users\Xoka74\Desktop\Xoka\polynomialRootSolve\Polynom\bin\Debug\net6.0\nunit.framework.dll
-C:\Users\Xoka74\Desktop\Xoka\polynomialRootSolve\Polynom\obj\Debug\net6.0\Polynom.csproj.CopyComplete

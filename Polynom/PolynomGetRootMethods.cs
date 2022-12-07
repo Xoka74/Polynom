@@ -8,10 +8,10 @@ public partial class Polynom
         throw new NotImplementedException();
     }
 
-    public string GetRoot(double delta = 1e-6)
+    public string GetRoot(double delta = 1e-3)
     {
         var derivative = GetDerivative();
-        double x = 10;
+        double x = 1;
         for (int i = 0; i < 10_000; i++)
         {
             var calcValue = GetValue(x);
